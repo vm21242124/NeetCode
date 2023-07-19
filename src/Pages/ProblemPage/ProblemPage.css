@@ -1,0 +1,103 @@
+.problempage {
+  display: flex;
+  height: 90vh;
+  justify-content: center;
+  width: 100%;
+
+  margin-top: 5px;
+}
+.leftproblemdis {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto;
+}
+.leftproblemMenu {
+  display: flex;
+  justify-content: space-around;
+  background-color: white;
+  width: 100%;
+  align-items: center;
+  height: 60px;
+  
+}
+.leftproblemMenu span{
+  color: violet;
+  font-weight: 500;
+  cursor: pointer;
+
+}
+.leftproblemMenu span:hover{
+  color: black;
+  text-decoration: underline;
+}
+
+.problemStatement {
+  display: flex;
+  width: 90%;
+  flex-direction: column;
+  margin-top: 10px;
+}
+.pdescription {
+  white-space: pre-line; /* or white-space: pre-wrap; */
+}
+.problem-examples {
+  width: 90%;
+  margin-top: 20px;
+}
+.peg {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 5px;
+
+}
+.pegexp{
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(46, 46, 46);
+    padding: 5px;
+    border-radius: 10px;
+    color: rgb(181, 181, 181);
+}
+.problem_constraints{
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    margin-bottom: 30px;
+    margin-top: 20px;
+}
+.rightidetop{
+    width: 90%;
+    height: 20px;
+    border-bottom: 1px solid rgb(141, 141, 141);
+}
+.langsel{
+    border: none;
+    outline: none;
+    background-color: transparent;
+   
+}
+.codepallete{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;align-items: center;
+}
+.idebottom{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    
+}
+.pcode{
+  height: 100%;
+  width: 90%;
+  resize: none;
+  outline: none;
+  border: none;
+  background-color: rgb(10, 8, 8);
+  color: rgb(176, 176, 245);
+  
+}
