@@ -13,7 +13,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route exact path="/" element={<HomePage />} />
-          <Route exact path="/problem" element={<ProblemPage />} />
+          <Route exact path="/problem/:id" element={<ProblemPage />} />
           <Route exact path="/admin" element={<AdminPanel />} />
           <Route exact path="/login" element={<LoginPage />} />
         </Routes>
