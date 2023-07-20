@@ -1,9 +1,12 @@
 import axios from "axios"
 import { useState } from "react"
+import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
+import { adduser } from "../../ReduxSetUp/userSlice"
 
 
 const SignIn = () => {
+    const dispatch=useDispatch()
     const [email, setEmail] = useState("")
     const [password, setPass] = useState("")
     const nav=useNavigate()
@@ -14,6 +17,8 @@ const SignIn = () => {
             email,password
         }).then((res)=>{
             if(res.status===200){
+                const user=
+                dispatch(adduser(res.data.user))
                 nav('/')
             }
         }).catch(e=>console.log(e.message))
