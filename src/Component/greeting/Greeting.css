@@ -1,0 +1,22 @@
+.greetings{
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    align-items: center;
+    margin-top: 30px;
+}
+.greetingadds{
+    display: flex;
+    margin-top: 20px;
+    
+}
+.ad{
+    height: 150px;
+    margin: 10px;
+}
+.greet{
+    font-size: 30px;
+    font-family: 'Times New Roman', Times, serif;
+    color:#080818 ;
+    text-transform: capitalize;
+}

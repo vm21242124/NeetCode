@@ -1,13 +1,11 @@
 import React, { useEffect, useState} from 'react'
 import './ProblemPage.css'
 import Navbar from '../../Component/Navbar/Navbar'
-import { javasnippet,cppsnippet} from '../../tempdata.js'
+import { cppsnippet} from '../../tempdata.js'
 import CodeMirror from '@uiw/react-codemirror'
-import {javascript} from "@codemirror/lang-javascript";
-import { java } from '@codemirror/lang-java'
-import { python } from '@codemirror/lang-python'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
+import { cpp } from '@codemirror/lang-cpp'
 
 
 const ProblemPage = () => {
@@ -27,46 +25,43 @@ const ProblemPage = () => {
     )
 }
 const  LeftProblemDis = ({problem1}) => {
+    
     return (
         <div className="leftproblemdis">
             <div className="leftproblemMenu">
                 <span >Description</span><span>Editorial</span><span>Comments</span>
             </div>
-
-
-            <div className="problemStatement">
-                <h3 className="ptitle">{problem1.title}</h3>
-                <p style={{ margin: "5px" }}>{problem1.level}</p>
-                <p className='pdescription'>{problem1.description}</p>
-            </div>
-            <div className="problem-examples">
-                {problem1.examples.map((item, key) => (
-                    <div key={key} className="peg">
-                        <h4>Example: {item.id}</h4>
-                        <div className="pegexp">
-                            <span>Input: {item.input}</span>
-                            <span>Output: {item.output}</span>
-                            <span>Explanation:{item.explanation}</span>
-                        </div>
+          <div className="problemStatement">
+                    <h3 className="ptitle">{problem1?.title}</h3>
+                    <p style={{ margin: "5px" ,color:"blue",fontSize:'20px',textTransform:"capitalize"}}>{problem1?.level}</p>
+                    <p className='pdescription'>{problem1?.description}</p>
+                </div><div className="problem-examples">
+                        {problem1.examples?.map((item, key) => (
+                            <div key={key} className="peg">
+                                <h4>Example: {item.id}</h4>
+                                <div className="pegexp">
+                                    <span>Input: {item.input}</span>
+                                    <span>Output: {item.output}</span>
+                                    <span>Explanation:{item.explanation}</span>
+                                </div>
+                            </div>
+                        ))}
+                    </div><div className="problem_constraints">
+                        <h4>Constaints</h4>
+                        {problem1?.constraint?.map((item, key) => (
+                            <span key={key}>👉{item.title}</span>
+                        ))}
+                        <span>o(n)</span>
                     </div>
-                ))}
-            </div>
-            <div className="problem_constraints">
-                <h4>Constaints</h4>
-                {problem1.constraint.map((item, key) => (
-                    <span key={key}>👉{item.title}</span>
-                ))}
-                <span>o(n)</span>
-            </div>
 
         </div>
     )
 }
 const RightProblemIDE = () => {
     const [lang,setLang]=useState("cpp")
-    const handlechange=()=>{
-
-    }
+  
+    const [code,setCode]=useState("")
+    // console.log(code)
 
     
     return (
@@ -82,17 +77,17 @@ const RightProblemIDE = () => {
             </div>
             <div className="codepallete">
                 {/* <CodeEditor/> */}
-                <CodeMirror value={javasnippet}
+                <CodeMirror value={cppsnippet}
                     className='pcode'
                     theme="dark"
-                    extensions={[java({java:true})]}
-                    onChange={handlechange} />
+                    extensions={[cpp({cpp:true})]}
+                    onChange={(val)=>setCode(val)} />
             </div>
             <div className="idebottom">
                 <span>console</span>
                 <div className="btnss">
 
-                    <button className="runbtn">Run</button>
+                    <button className="runbtn" onClick={()=>console.log(code)}>Run</button>
                     <button className="submitbtn">Submit</button>
                 </div>
             </div>

@@ -13,8 +13,8 @@ const Navbar = () => {
       </div>
       <div className="rightnav">
 
-        <span className="btnlogin">{user ? `Hii.. ${user.name}` : "LOG IN"}</span>
-        <span className="btnlogin">{user ? "" : "SIGN UP"}</span>
+        <span className="btnlogin" style={{cursor:"pointer"}} onClick={!user?()=>nav('/login'):nav('/')}>{user ? `Hii.. ${user.name}` : "LOG IN"}</span>
+        <span className="btnlogin" >{user ? "" : "SIGN UP"}</span>
 
       </div>
     </div>
