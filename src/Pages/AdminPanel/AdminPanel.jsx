@@ -1,5 +1,9 @@
 import React, { useState } from 'react'
 import './AdminPanel.css'
+import axios from 'axios'
+import { useSelector } from 'react-redux'
+import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 const AdminPanel = () => {
   const [view, setView] = useState("create_problem")
   return (
@@ -18,16 +22,30 @@ const AdminPanel = () => {
   )
 }
 const CreateProblem = () => {
+  const user=useSelector((state)=>state.user.user)
+  const nav=useNavigate()
+  useEffect(()=>{
+    if(!user){
+      nav('/')
+    }else{
+      if(user.role!=='ADMIN'){
+        nav('/')
+      }
+    }
+  },[user])
   const [page, setPage] = useState("first")
-  const [ptitle, setPtitle] = useState("")
-  const [pdes, setPdes] = useState("")
+  const [title, setPtitle] = useState("")
+  const [description, setPdes] = useState("")
   const [level, setLevel] = useState("")
-  const [eg, setEg] = useState("")
-  const [testcase, setTestcase] = useState("")
+  const [examples, setEg] = useState("")
+  const [constraint, setConstraint] = useState("")
+  const [stdin, setStdin] = useState("")
+  const [stdout, setStdop] = useState("")
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log({ title: ptitle, level, description: pdes, sampleEg: eg, testcases: testcase })
+    console.log({title,level,description,examples,constraint,stdin,stdout});
+    axios.post('/problem/create',{title,level,description,examples,constraint,stdin,stdout}).then((res)=>console.log(res.data)).catch(e=>console.log(e.message))
   }
   return (
     <div className="createproblem">
@@ -48,13 +66,20 @@ const CreateProblem = () => {
           <div onClick={() => setLevel("medium")} style={{ color: "orange" }}>MEDIUM</div>
           <div onClick={() => setLevel("hard")} style={{ color: "red" }}>HARD</div>
         </div>
+        <p className="pheading">constraint</p>
+        <textarea type="text" className="problem_testcases"
+          onChange={(e) => setConstraint(e.target.value)} />
         <button onClick={() => (setPage("second"))} className='nextbtn'>NEXT</button>
       </div> :
+
         <div className="second">
-          <p className="pheading">add test cases</p>
+          <p className="pheading">input</p>
           <textarea type="text" className="problem_testcases"
-            onChange={(e) => setTestcase(e.target.value)} />
-          <p className="pheading">add examples</p>
+            onChange={(e) => setStdin(e.target.value)} />
+          <p className="pheading">expected output </p>
+          <textarea type="text" className="problem_testcases"
+            onChange={(e) => setStdop(e.target.value)} />
+          <p className="pheading">Examples</p>
           <textarea type="text" className="problem_testcases"
             onChange={(e) => setEg(e.target.value)} />
           <div className="btns">
@@ -63,6 +88,7 @@ const CreateProblem = () => {
           </div>
 
         </div>
+
       }
 
     </div>
