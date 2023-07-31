@@ -1,11 +1,21 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './AdminPanel.css'
 import axios from 'axios'
 import { useSelector } from 'react-redux'
-import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+
 const AdminPanel = () => {
   const [view, setView] = useState("create_problem")
+  const nav=useNavigate()
+  const user=useSelector((state)=>state.user.user)
+  useEffect(()=>{
+    if(!user){
+      nav('/')
+    }
+    if(user?.role!=='ADMIN'){
+      nav('/')
+    }
+  })
   return (
     <div className="adminpanel">
       <div className="adminpage">
@@ -22,17 +32,8 @@ const AdminPanel = () => {
   )
 }
 const CreateProblem = () => {
-  const user=useSelector((state)=>state.user.user)
-  const nav=useNavigate()
-  useEffect(()=>{
-    if(!user){
-      nav('/')
-    }else{
-      if(user.role!=='ADMIN'){
-        nav('/')
-      }
-    }
-  },[user])
+
+ 
   const [page, setPage] = useState("first")
   const [title, setPtitle] = useState("")
   const [description, setPdes] = useState("")

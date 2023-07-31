@@ -8,12 +8,11 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { cpp } from '@codemirror/lang-cpp'
 import { useSelector } from 'react-redux'
 
-
 const ProblemPage = () => {
+    const user = useSelector((state) => state.user.user)
+    const nav=useNavigate()
     const [problem, setProblem] = useState([])
     const { id } = useParams()
-    const nav = useNavigate()
-    const user = useSelector((state) => state.user.user)
     useEffect(() => {
         axios.get(`/problem/${id}`).then((res) => setProblem(res.data)).catch(e => console.log(e.message))
 
@@ -23,18 +22,18 @@ const ProblemPage = () => {
             <Navbar />
             <div className="problempage">
                 <LeftProblemDis problem1={problem} />
-                {user ? <RightProblemIDE problem={problem} /> :
+                {user ?
+                    <RightProblemIDE problem={problem} /> :
                     <div className="logindiv">
                         <p>please login to code</p>
                         <button onClick={() => nav('/login')} className='btnlogin' style={{ textTransform: "uppercase", border: "1px solid white", marginTop: "10px" }}>login</button>
-                    </div>
-                }
+                    </div>}
             </div>
         </div>
     )
 }
 const LeftProblemDis = ({ problem1 }) => {
-   
+
     return (
         <div className="leftproblemdis">
             <div className="leftproblemMenu">
@@ -50,7 +49,10 @@ const LeftProblemDis = ({ problem1 }) => {
                     <h4>Examples:</h4>
                     <div className="pegexp">
                         {problem1?.examples?.split("\n").map((item, key) => (
-                            <div key={key}>{item}</div>
+                            <React.Fragment key={key}>
+                                {item}
+                                <br />
+                            </React.Fragment>
                         ))}
                     </div>
                 </div>
@@ -73,7 +75,7 @@ const RightProblemIDE = ({ problem }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         const stdin = problem?.stdin
-        axios.post(`/problem/submit/${problem._id}`, { code, stdin, lang: 'cpp' })
+        axios.post(`/problem/submit/${problem._id}`, { code, stdin, lang })
     }
     return (
         <div className="leftproblemdis">
