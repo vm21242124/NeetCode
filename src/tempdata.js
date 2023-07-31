@@ -117,5 +117,5 @@ export const problem = {
 };
 
 export const javasnippet="class NeetCode {\n   public static void main(String[] args) {\n      System.out.println('hello world'));\n }\n}"
-export const cppsnippet=`#include<iostream>\n\n int main(){\n\n cout<<"hello neetcode"<<endl; \n\n return 0;\n\n}\n`
+export const cppsnippet='#include <iostream>\n\nint main() {\n    std::cout << "Hello Neetcode!";\n    return 0;\n}'
 export const pythonsnippet="print('welcome ')"

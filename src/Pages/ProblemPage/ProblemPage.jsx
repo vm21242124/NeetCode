@@ -72,10 +72,19 @@ const RightProblemIDE = ({ problem }) => {
     const [code, setCode] = useState(cppsnippet)
 
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async(e) => {
         e.preventDefault();
         const stdin = problem?.stdin
-        axios.post(`/problem/submit/${problem._id}`, { code, stdin, lang })
+        
+    
+        const res=await axios.post(`/problem/submit/${problem._id}`, { code, stdin, lang })
+        const token=res.data
+        console.log(token);
+        setTimeout(async()=>{
+            
+            const op=await axios.get(`/problem/getop/${token.token}`)
+            console.log('output',op);
+        },15000)
     }
     return (
         <div className="leftproblemdis">
