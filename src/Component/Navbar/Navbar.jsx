@@ -12,7 +12,7 @@ const Navbar = () => {
     <div className="Navbar">
       <h3 style={{cursor:"pointer"}} onClick={()=>nav('/')}>NeetCode</h3>
       <div className="leftnav">
-        <span>Problems</span><span>Contest</span><span>POTD</span><span>IDE</span>
+        <span>Problems</span><span>Contest</span><span>POTD</span><span onClick={()=>nav('/ide')}>IDE</span>
       </div>
       <div className="rightnav">
         {user?<span className="btnlogin" style={{cursor:"pointer"}} >Hi..{user?.name}</span>:<span className="btnlogin" style={{cursor:"pointer"}} onClick={()=>nav('/login')}> LOG IN</span>}
