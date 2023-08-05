@@ -16,27 +16,45 @@ const RightProblemIDE = ({ problem }) => {
     const [cons, setConsole] = useState(false)
     const [op, setOp] = useState("")
     const [loader, setLoader] = useState(false)
+    const [err,setError]=useState(null)
     const handleSubmit = async (e) => {
         e.preventDefault();
         setConsole(true)
+        setOp("")
         setLoader(true)
+        setError(null)
         const stdin = problem?.stdin
         const codeBase64 = btoa(unescape(encodeURIComponent(code)));
         const stdinBase64 = btoa(unescape(encodeURIComponent(stdin)));
+        console.log({ code: codeBase64, stdin: stdinBase64, lang });
 
-        const res = await axios.post(`/problem/submit/${problem._id}`, { code: codeBase64, stdin: stdinBase64, lang })
-        const token = res.data
-        console.log(token);
 
+        try {
+            const res = await axios.post(`/problem/submit/${problem._id}`, { code: codeBase64, stdin: stdinBase64, lang })
+            console.log(res);
+            const token = res.data.token
+            
         setTimeout(async () => {
+            try {
+                const op = await axios.get(`/problem/getop/${token}`);
+               if(op.status===200){
 
-            const op = await axios.get(`/problem/getop/${token.token}`)
-            setOp(op.data?.stdout)
-
-            setLoader(false)
-        }, 15000)
+                setOp(op.data.stdout);
+               }else{
+                setError("Compilation Error Check Your Code")
+               }     
+            } catch (e) {
+                setError("Compilation Error Check Your Code");
+            } finally {
+                console.log(err);
+                setLoader(false);
+            }
+        }, 15000);
+        } catch (error) {
+           
+            setLoader(false);
+        }   
     }
-
     const handelchange = (e) => {
         e.preventDefault();
         setLang(e.target.value)
@@ -89,12 +107,15 @@ const RightProblemIDE = ({ problem }) => {
                         <div className="l"></div>
                         <p>submiting your solution</p>
                     </div> : ""}
-                    <div className="close"><AiOutlineClose onClick={() => setConsole(false)} fontSize={"20px"} cursor={"pointer"} fontWeight={"800"} /></div>
+                    <div className="close"><AiOutlineClose onClick={() => setConsole(false)} fontSize={"20px"} cursor={"pointer"} fontWeight={"800"} color='red'/></div>
+                    {err!==null? <div className="op1">
+                        {err}
+                    </div>:
                     <div className="op1">
                         <p>stdin</p>
                         <p>expected op</p>
                         <p>your op</p>
-                    </div>
+                    </div>}
                     <div className="op">
                         <div className="stdin">
                             {problem?.stdin?.split("\n").map((item, key) => (

@@ -5,12 +5,9 @@ import { useNavigate } from 'react-router-dom'
 const Allproblem = () => {
   const nav=useNavigate()
     const [problems,setProblems]=useState([])
-  
-    
     useEffect(()=>{
         axios.get('/problem/all').then((res)=>setProblems(res.data)).catch((e)=>console.log(e.message))
     })
-    
     return (
         <div className="allproblems">
             <h3>Solve Problem</h3>
