@@ -87,21 +87,21 @@ const RightProblemIDE = ({ problem }) => {
                     value={cppsnippet}
                     className='pcode'
                     theme='dark'
-                    extensions={[cpp()]}
+                    extensions={cpp()}
                     onChange={(val) => setCode(val)}
                 /> :""}
                 {lang === 'java' ? <CodeMirror
                     value={javasnippet}
                     className='pcode'
                     theme='dark'
-                    extensions={[java()]}
+                    extensions={java()}
                     onChange={(val) => setCode(val)}
                 /> : ""}
                 {lang === 'python' ? <CodeMirror
                     value={pythonsnippet}
                     className='pcode'
                     theme='dark'
-                    extensions={[python()]}
+                    extensions={python()}
                     onChange={(val) => setCode(val)}
                 /> : ""}
 
