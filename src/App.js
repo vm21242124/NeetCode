@@ -5,7 +5,8 @@ import ProblemPage from "./Pages/ProblemPage/ProblemPage";
 import LoginPage from "./Pages/LoginPage/LoginPage";
 import axios from "axios";
 import IDE from "./Pages/IDE/IDE";
-axios.defaults.baseURL = "http://localhost:5000";
+// axios.defaults.baseURL = "http://localhost:5000";
+axios.defaults.baseURL="https://neetcode.onrender.com"
 axios.defaults.withCredentials = true;
 function App() {
   return (
