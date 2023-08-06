@@ -5,8 +5,8 @@ import CodeMirror from '@uiw/react-codemirror'
 import { cpp } from '@codemirror/lang-cpp'
 import { java } from '@codemirror/lang-java'
 import { python } from '@codemirror/lang-python'
-import './RightProblemIDE.css'
 import { AiOutlineClose } from 'react-icons/ai'
+import './RightProblemIDE.css'
 
 
 const RightProblemIDE = ({ problem }) => {
@@ -83,27 +83,27 @@ const RightProblemIDE = ({ problem }) => {
             </div>
             <div className="codepallete">
                 {/* <CodeEditor/> */}
-                {lang === 'cpp' ? <CodeMirror
+               ? <CodeMirror
                     value={cppsnippet}
                     className='pcode'
                     theme='dark'
                     extensions={[cpp({ cpp: true })]}
                     onChange={(val) => setCode(val)}
-                /> : ""}
-                {lang === 'java' ? <CodeMirror
+                /> 
+                {/* {lang === 'java' ? <CodeMirror
                     value={javasnippet}
                     className='pcode'
                     theme='dark'
                     extensions={[java({ java: true })]}
                     onChange={(val) => setCode(val)}
-                /> : ""}
-                {lang === 'python' ? <CodeMirror
+                /> : ""} */}
+                {/* {lang === 'python' ? <CodeMirror
                     value={pythonsnippet}
                     className='pcode'
                     theme='dark'
                     extensions={[python({ py: true })]}
                     onChange={(val) => setCode(val)}
-                /> : ""}
+                /> : ""} */}
 
             </div>
             <div className="idebottom">
