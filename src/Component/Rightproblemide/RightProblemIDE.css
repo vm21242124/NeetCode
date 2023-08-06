@@ -1,13 +1,14 @@
 .output {
   position: absolute;
   bottom: 0px;
-  height: 150px;
+  height: 200px;
   width: 45%;
   background-color: #ffffff;
   border: 1px solid black;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  overflow-y: auto;
   align-items: center;
 }
 .loader {

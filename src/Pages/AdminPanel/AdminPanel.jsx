@@ -45,8 +45,7 @@ const CreateProblem = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log({ title, level, description, examples, constraint, stdin, stdout });
-    axios.post('/problem/create', { title, level, description, examples, constraint, stdin, stdout }).then((res) => console.log(res.data)).catch(e => console.log(e.message))
+    axios.post('/problem/create', { title, level, description, examples, constraint, stdin, stdout }).then((res) => alert("problem created successfully")).catch(e => console.log(e.message))
   }
   return (
     <div className="createproblem">
