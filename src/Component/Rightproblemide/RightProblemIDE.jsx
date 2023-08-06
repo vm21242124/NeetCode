@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import { cppsnippet, javasnippet, pythonsnippet } from '../../tempdata.js'
 import CodeMirror from '@uiw/react-codemirror'
+import {basicSetup} from 'codemirror'
 import { cpp } from '@codemirror/lang-cpp'
 import { java } from '@codemirror/lang-java'
 import { python } from '@codemirror/lang-python'
@@ -83,27 +84,28 @@ const RightProblemIDE = ({ problem }) => {
             </div>
             <div className="codepallete">
                 {/* <CodeEditor/> */}
-                {lang ==='cpp' ?<CodeMirror
+                <CodeMirror
                     value={cppsnippet}
                     className='pcode'
                     theme='dark'
                     extensions={cpp()}
+                    
                     onChange={(val) => setCode(val)}
-                /> :""}
-                {lang === 'java' ? <CodeMirror
+                /> 
+                {/* {lang === 'java' ? <CodeMirror
                     value={javasnippet}
                     className='pcode'
                     theme='dark'
                     extensions={java()}
                     onChange={(val) => setCode(val)}
-                /> : ""}
-                {lang === 'python' ? <CodeMirror
+                /> : ""} */}
+                {/* {lang === 'python' ? <CodeMirror
                     value={pythonsnippet}
                     className='pcode'
                     theme='dark'
                     extensions={python()}
                     onChange={(val) => setCode(val)}
-                /> : ""}
+                /> : ""} */}
 
             </div>
             <div className="idebottom">
