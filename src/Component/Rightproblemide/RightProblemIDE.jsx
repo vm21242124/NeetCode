@@ -83,27 +83,27 @@ const RightProblemIDE = ({ problem }) => {
             </div>
             <div className="codepallete">
                 {/* <CodeEditor/> */}
-               ? <CodeMirror
+                {lang ==='cpp' ?<CodeMirror
                     value={cppsnippet}
                     className='pcode'
                     theme='dark'
-                    extensions={[cpp({ cpp: true })]}
+                    extensions={[cpp()]}
                     onChange={(val) => setCode(val)}
-                /> 
-                {/* {lang === 'java' ? <CodeMirror
+                /> :""}
+                {lang === 'java' ? <CodeMirror
                     value={javasnippet}
                     className='pcode'
                     theme='dark'
-                    extensions={[java({ java: true })]}
+                    extensions={[java()]}
                     onChange={(val) => setCode(val)}
-                /> : ""} */}
-                {/* {lang === 'python' ? <CodeMirror
+                /> : ""}
+                {lang === 'python' ? <CodeMirror
                     value={pythonsnippet}
                     className='pcode'
                     theme='dark'
-                    extensions={[python({ py: true })]}
+                    extensions={[python()]}
                     onChange={(val) => setCode(val)}
-                /> : ""} */}
+                /> : ""}
 
             </div>
             <div className="idebottom">
