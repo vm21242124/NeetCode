@@ -17,8 +17,8 @@ const RightProblemIDE = ({ problem }) => {
     const [result, setResult] = useState(true)
     const changeLang = (e) => {
         e.preventDefault();
-        console.log(lang);
         setLang(e.target.value)
+        console.log(lang);
     }
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -29,8 +29,8 @@ const RightProblemIDE = ({ problem }) => {
         const stdin = problem?.stdin
         const codeBase64 = btoa(unescape(encodeURIComponent(code)));
         const stdinBase64 = btoa(unescape(encodeURIComponent(stdin)));
-
-
+        
+        console.log({ code: codeBase64, stdin: stdinBase64, lang });
 
         try {
             const res = await axios.post(`/problem/submit/${problem._id}`, { code: codeBase64, stdin: stdinBase64, lang })
@@ -69,7 +69,7 @@ const RightProblemIDE = ({ problem }) => {
     }
     const handelchange = (value, e) => {
         setCode(value)
-        
+
     }
     return (
         <div className="leftproblemdis">
@@ -84,8 +84,7 @@ const RightProblemIDE = ({ problem }) => {
             </div>
             <div className="codepallete">
                 {lang === "cpp" ? <Editor
-                    height="90%"
-                    width="100%"
+                    className='pcode'
                     defaultLanguage="cpp"
                     defaultValue={cppsnippet}
                     onChange={handelchange}
@@ -99,14 +98,14 @@ const RightProblemIDE = ({ problem }) => {
                     onChange={handelchange}
 
                 /> : ""}
-                {lang==="python"?<Editor
+                {lang === "python" ? <Editor
                     height="90%"
                     width="100%"
                     defaultLanguage="python"
                     defaultValue={pythonsnippet}
                     onChange={handelchange}
 
-                />:""}
+                /> : ""}
 
             </div>
             <div className="idebottom">
