@@ -1,12 +1,8 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import { cppsnippet, javasnippet, pythonsnippet } from '../../tempdata.js'
-import CodeMirror from '@uiw/react-codemirror'
-import {basicSetup} from 'codemirror'
-import { cpp } from '@codemirror/lang-cpp'
-import { java } from '@codemirror/lang-java'
-import { python } from '@codemirror/lang-python'
 import { AiOutlineClose } from 'react-icons/ai'
+import Editor from '@monaco-editor/react';
 import './RightProblemIDE.css'
 
 
@@ -19,7 +15,11 @@ const RightProblemIDE = ({ problem }) => {
     const [loader, setLoader] = useState(false)
     const [err, setError] = useState(null)
     const [result, setResult] = useState(true)
-
+    const changeLang = (e) => {
+        e.preventDefault();
+        console.log(lang);
+        setLang(e.target.value)
+    }
     const handleSubmit = async (e) => {
         e.preventDefault();
         setConsole(true)
@@ -67,15 +67,15 @@ const RightProblemIDE = ({ problem }) => {
             setLoader(false);
         }
     }
-    const handelchange = (e) => {
-        e.preventDefault();
-        setLang(e.target.value)
+    const handelchange = (value, e) => {
+        setCode(value)
+        
     }
     return (
         <div className="leftproblemdis">
             <div className="rightidetop">
                 <div className="lang">
-                    <select className='langsel' value={lang} onChange={handelchange} >
+                    <select className='langsel' value={lang} onChange={changeLang} >
                         <option value='cpp' >cpp</option>
                         <option value='java'>java</option>
                         <option value='python'>python</option>
@@ -83,27 +83,30 @@ const RightProblemIDE = ({ problem }) => {
                 </div>
             </div>
             <div className="codepallete">
-                {/* <CodeEditor/> */}
-                <CodeMirror
-                    value={cppsnippet}
-                    className='pcode'
-                    theme='dark'
-                    onChange={(val) => setCode(val)}
-                /> 
-                {/* {lang === 'java' ? <CodeMirror
-                    value={javasnippet}
-                    className='pcode'
-                    theme='dark'
-                    extensions={java()}
-                    onChange={(val) => setCode(val)}
-                /> : ""} */}
-                {/* {lang === 'python' ? <CodeMirror
-                    value={pythonsnippet}
-                    className='pcode'
-                    theme='dark'
-                    extensions={python()}
-                    onChange={(val) => setCode(val)}
-                /> : ""} */}
+                {lang === "cpp" ? <Editor
+                    height="90%"
+                    width="100%"
+                    defaultLanguage="cpp"
+                    defaultValue={cppsnippet}
+                    onChange={handelchange}
+
+                /> : ""}
+                {lang === "java" ? <Editor
+                    height="90%"
+                    width="100%"
+                    defaultLanguage="java"
+                    defaultValue={javasnippet}
+                    onChange={handelchange}
+
+                /> : ""}
+                {lang==="python"?<Editor
+                    height="90%"
+                    width="100%"
+                    defaultLanguage="python"
+                    defaultValue={pythonsnippet}
+                    onChange={handelchange}
+
+                />:""}
 
             </div>
             <div className="idebottom">
