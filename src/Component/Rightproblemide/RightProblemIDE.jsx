@@ -84,13 +84,12 @@ const RightProblemIDE = ({ problem }) => {
             </div>
             <div className="codepallete">
                 {/* <CodeEditor/> */}
-                {/* <CodeMirror
+                <CodeMirror
                     value={cppsnippet}
                     className='pcode'
                     theme='dark'
-                    
                     onChange={(val) => setCode(val)}
-                />  */}
+                /> 
                 {/* {lang === 'java' ? <CodeMirror
                     value={javasnippet}
                     className='pcode'
